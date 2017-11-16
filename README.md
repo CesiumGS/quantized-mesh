@@ -79,10 +79,26 @@ struct VertexData
 };
 ```
 
-The `vertexCount` field indicates the size of the three arrays that follow. The three arrays are zig-zag encoded in order to make small integers, regardless of their sign, use a small number of bits. Decoding a zig-zag encoded value is straightforward:
+The `vertexCount` field indicates the size of the three arrays that follow. The three arrays contain the delta from the previous value that is then zig-zag encoded in order to make small integers, regardless of their sign, use a small number of bits. Decoding a value is straightforward:
 
-```C++
-decoded = (encodedValue >> 1) ^ (-(encodedValue & 1))
+```javascript
+var u = 0;
+var v = 0;
+var height = 0;
+
+function zigZagDecode(value) {
+    return (value >> 1) ^ (-(value & 1));
+}
+
+for (i = 0; i < vertexCount; ++i) {
+    u += zigZagDecode(uBuffer[i]);
+    v += zigZagDecode(vBuffer[i]);
+    height += zigZagDecode(heightBuffer[i]);
+
+    uBuffer[i] = u;
+    vBuffer[i] = v;
+    heightBuffer[i] = height;
+}
 ```
 
 Once decoded, the meaning of a value in each array is as follows:
