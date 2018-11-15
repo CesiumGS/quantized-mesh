@@ -250,3 +250,25 @@ __Requesting:__ For the watermask to be included in the quantized-mesh, the clie
 ```
 Accept : 'application/vnd.quantized-mesh;extensions=watermask'
 ```
+
+### Metadata
+__Name:__ Metadata
+
+__Id:__ 4
+
+__Description:__ Adds a JSON object to each tile that can store extra information about the tile. Potential uses include storing the what type of land is in the tile (eg. forest, desert, etc) or availability of child tiles.
+
+__Data Definition:__
+
+```C++
+struct Metadata
+{
+    unsigned int jsonLength;
+    char json[jsonLength];
+}
+```
+
+__Requesting:__ For the metadata to be included in the quantized-mesh, the client must request this extension by using the following HTTP Header:
+```
+Accept : 'application/vnd.quantized-mesh;extensions=metadata'
+```
