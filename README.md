@@ -1,6 +1,10 @@
 # quantized-mesh-1.0 terrain format
 
+Tools to generate quantized-mesh-1.0 are available on [Cesium ion](https://cesium.com/ion/).
+
 Have a question? Discuss the quantized-mesh specification on the [Cesium forum](http://cesiumjs.org/forum.html).
+
+---
 
 A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of heightmaps according to the [Tile Map Service (TMS)](http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) layout and global-geodetic profile. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
 
