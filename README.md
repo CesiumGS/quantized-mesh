@@ -2,7 +2,7 @@
 
 Have a question? Discuss the quantized-mesh specification on the [Cesium forum](http://cesiumjs.org/forum.html).
 
-A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of heightmaps according to the [Tile Map Service (TMS)](http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) layout and global-geodetic profile. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
+A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of heightmaps. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
 
 ```
 http://assets.agi.com/stk-terrain/world/tiles
@@ -175,6 +175,15 @@ struct EdgeIndices32
 ```
 
 These index lists enumerate the vertices that are on the edges of the tile. It is helpful to know which vertices are on the edges in order to add skirts to hide cracks between adjacent levels of detail.
+
+## Tiling Scheme and Coordinate System
+
+By default, the data is tiled according to the [Tile Map Service (TMS)](http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) layout and global-geodetic profile. These defaults can be varied by specifying the `projection` and `scheme`.
+
+Allowed values for the projection are `EPSG:3857` and `EPSG:4326` and for the scheme are `tms` and `slippyMap`.
+
+For Cesium terrain layers these options can be set in the `layer.json` manifest file. If not specified, they default
+to `EPSG:4326` and `tms`.
 
 ## Extensions
 Extension data may follow to supplement the quantized-mesh with additional information. Each extension begins with an `ExtensionHeader`, consisting of a unique identifier and the size of the extension data in bytes. An `unsigned char` is a 8-bit unsigned integer.
