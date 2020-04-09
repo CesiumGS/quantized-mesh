@@ -178,9 +178,11 @@ These index lists enumerate the vertices that are on the edges of the tile. It i
 
 ## Tiling Scheme and Coordinate System
 
-By default, the data is tiled according to the [Tile Map Service (TMS)](http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) layout and global-geodetic profile. These defaults can be varied by specifying the `projection` and `scheme`.
+By default, the data is tiled according to the [Tile Map Service (TMS)](http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) layout and global-geodetic system. These defaults can be varied by specifying the `projection` and `scheme`.
 
-Allowed values for the projection are `EPSG:3857` and `EPSG:4326` and for the scheme are `tms` and `slippyMap`.
+Allowed values for the projection are `EPSG:3857` ([Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) as used by Google Maps) and `EPSG:4326` (Lat/Lng coordinates in the [Global-Geodetic System](https://en.wikipedia.org/wiki/World_Geodetic_System)). It is worth noting that the `EPSG3857` projection has only 1 tile at the root (zoom level 0) while `EPSG:4326` has 2.
+
+The options for the tiling scheme are `tms` and `slippyMap`. The Y coordinates are numbered from the south northwards (eg. latitudes) in the `tms` standard whereas `slippyMap` coordinates have their origin at top left (NW).
 
 For Cesium terrain layers these options can be set in the `layer.json` manifest file. If not specified, they default
 to `EPSG:4326` and `tms`.
