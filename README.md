@@ -5,24 +5,24 @@ Have a question? Discuss the quantized-mesh specification on the [Cesium forum](
 A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of heightmaps. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
 
 ```
-http://assets.agi.com/stk-terrain/world/tiles
+http://example.com/tiles
 ```
 
 Then the two root files of the pyramid are found at these URLs:
 
-* (-180 deg, -90 deg) - (0 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/0/0/0.terrain
-* (0 deg, -90 deg) - (180 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/0/1/0.terrain
+* (-180 deg, -90 deg) - (0 deg, 90 deg) - http://example.com/tiles/0/0/0.terrain
+* (0 deg, -90 deg) - (180 deg, 90 deg) - http://example.com/tiles/0/1/0.terrain
 
 The eight tiles at the next level are found at these URLs:
 
-* (-180 deg, -90 deg) - (-90 deg, 0 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/0/0.terrain
-* (-90 deg, -90 deg) - (0 deg, 0 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/1/0.terrain
-* (0 deg, -90 deg) - (90 deg, 0 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/2/0.terrain
-* (90 deg, -90 deg) - (180 deg, 0 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/3/0.terrain
-* (-180 deg, 0 deg) - (-90 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/0/1.terrain
-* (-90 deg, 0 deg) - (0 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/1/1.terrain
-* (0 deg, 0 deg) - (90 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/2/1.terrain
-* (90 deg, 0 deg) - (180 deg, 90 deg) - http://assets.agi.com/stk-terrain/world/tiles/1/3/1.terrain
+* (-180 deg, -90 deg) - (-90 deg, 0 deg) - http://example.com/tiles/1/0/0.terrain
+* (-90 deg, -90 deg) - (0 deg, 0 deg) - http://example.com/tiles/1/1/0.terrain
+* (0 deg, -90 deg) - (90 deg, 0 deg) - http://example.com/tiles/1/2/0.terrain
+* (90 deg, -90 deg) - (180 deg, 0 deg) - http://example.com/tiles/1/3/0.terrain
+* (-180 deg, 0 deg) - (-90 deg, 90 deg) - http://example.com/tiles/1/0/1.terrain
+* (-90 deg, 0 deg) - (0 deg, 90 deg) - http://example.com/tiles/1/1/1.terrain
+* (0 deg, 0 deg) - (90 deg, 90 deg) - http://example.com/tiles/1/2/1.terrain
+* (90 deg, 0 deg) - (180 deg, 90 deg) - http://example.com/tiles/1/3/1.terrain
 
 When requesting tiles, be sure to include the following HTTP header in the request:
 ```
