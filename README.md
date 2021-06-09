@@ -2,7 +2,7 @@
 
 Have a question? Discuss the quantized-mesh specification on the [Cesium community forum](https://community.cesium.com/).
 
-A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of heightmaps. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
+A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
 
 ```
 http://example.com/tiles
