@@ -2,27 +2,29 @@
 
 Have a question? Discuss the quantized-mesh specification on the [Cesium community forum](https://community.cesium.com/).
 
-A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
+A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes.
+
+The structure of this pyramid is defined in a `layer.json` file. The format of this file is described in the [`SPECIFICATION.md`](./SPECIFICATION.md]). This file contains information about the URL at which the actual terrain tiles can be requested. For example, when the URL for a tileset is
 
 ```
 http://example.com/tiles
 ```
 
-Then the two root files of the pyramid are found at these URLs:
+then then the two root files of the pyramid may be found at these URLs:
 
-* (-180 deg, -90 deg) - (0 deg, 90 deg) - http://example.com/tiles/0/0/0.terrain
-* (0 deg, -90 deg) - (180 deg, 90 deg) - http://example.com/tiles/0/1/0.terrain
+* (-180 deg, -90 deg) - (0 deg, 90 deg) - `http://example.com/tiles/0/0/0.terrain`
+* (0 deg, -90 deg) - (180 deg, 90 deg) - `http://example.com/tiles/0/1/0.terrain`
 
-The eight tiles at the next level are found at these URLs:
+The eight tiles at the next level are then found at these URLs:
 
-* (-180 deg, -90 deg) - (-90 deg, 0 deg) - http://example.com/tiles/1/0/0.terrain
-* (-90 deg, -90 deg) - (0 deg, 0 deg) - http://example.com/tiles/1/1/0.terrain
-* (0 deg, -90 deg) - (90 deg, 0 deg) - http://example.com/tiles/1/2/0.terrain
-* (90 deg, -90 deg) - (180 deg, 0 deg) - http://example.com/tiles/1/3/0.terrain
-* (-180 deg, 0 deg) - (-90 deg, 90 deg) - http://example.com/tiles/1/0/1.terrain
-* (-90 deg, 0 deg) - (0 deg, 90 deg) - http://example.com/tiles/1/1/1.terrain
-* (0 deg, 0 deg) - (90 deg, 90 deg) - http://example.com/tiles/1/2/1.terrain
-* (90 deg, 0 deg) - (180 deg, 90 deg) - http://example.com/tiles/1/3/1.terrain
+* (-180 deg, -90 deg) - (-90 deg, 0 deg) - `http://example.com/tiles/1/0/0.terrain`
+* (-90 deg, -90 deg) - (0 deg, 0 deg) - `http://example.com/tiles/1/1/0.terrain`
+* (0 deg, -90 deg) - (90 deg, 0 deg) - `http://example.com/tiles/1/2/0.terrain`
+* (90 deg, -90 deg) - (180 deg, 0 deg) - `http://example.com/tiles/1/3/0.terrain`
+* (-180 deg, 0 deg) - (-90 deg, 90 deg) - `http://example.com/tiles/1/0/1.terrain`
+* (-90 deg, 0 deg) - (0 deg, 90 deg) - `http://example.com/tiles/1/1/1.terrain`
+* (0 deg, 0 deg) - (90 deg, 90 deg) - `http://example.com/tiles/1/2/1.terrain`
+* (90 deg, 0 deg) - (180 deg, 90 deg) - `http://example.com/tiles/1/3/1.terrain`
 
 When requesting tiles, be sure to include the following HTTP header in the request:
 ```
