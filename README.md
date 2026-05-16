@@ -4,7 +4,7 @@ Have a question? Discuss the quantized-mesh specification on the [Cesium communi
 
 A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes.
 
-The structure of this pyramid is defined in a `layer.json` file. The format of this file is described in the [`SPECIFICATION.md`](./SPECIFICATION.md]). This file contains information about the URL at which the actual terrain tiles can be requested. For example, when the URL for a tileset is
+The structure of this pyramid is defined in a `layer.json` file. The format of this file is described in the [`SPECIFICATION.md`](./SPECIFICATION.md). This file contains information about the URL at which the actual terrain tiles can be requested. For example, when the URL for a tileset is
 
 ```
 http://example.com/tiles
