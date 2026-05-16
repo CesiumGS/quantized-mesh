@@ -14,7 +14,7 @@ This section describes the format of the `layer.json` manifest file. The format 
 | scheme | `string` | The tiling scheme. The only valid value is `"tms"`. | No. Default: `"tms"` |
 | extensions | `string[]` | The extensions available for this tileset. | No. Default: `undefined` |
 | projection | `string` | The map projection of this tileset. Valid values are `"EPSG:4326"` and `"EPSG:3857"`. | No. Default: `"EPSG:4326"` |
-| parentUrl | `string` | The URL of the parent layer.json that this one is layered on top of. | No. Default: `undefined` |
+| parentUrl | `string` | The URL of the parent layer.json that this one is layered on top of. When this is defined, then availability information and the presence of extensions should also be looked up in the parent. Attributions from parents should be integrated into the overall attribution. | No. Default: `undefined` |
 | minzoom | `integer` | The minimum level for which there are any available tiles. | No. Default: `0` |
 | maxzoom | `integer` | The maximum level for which there are any available tiles. | Yes |
 | bounds | `number[4]` | The bounding box of the terrain, expressed as `[west, south, east, north]`, in degrees. This is not required for calculating tile positions or downloads. Implementations may choose to ignore this property. | No. Default: `[-180,-90,180,90]` |
