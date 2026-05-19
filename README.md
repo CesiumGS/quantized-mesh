@@ -2,27 +2,29 @@
 
 Have a question? Discuss the quantized-mesh specification on the [Cesium community forum](https://community.cesium.com/).
 
-A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes. All tiles have the extension .terrain. So, if the Tiles URL for a tileset is:
+A terrain tileset in quantized-mesh-1.0 format is a simple multi-resolution quadtree pyramid of meshes.
+
+The structure of this pyramid is defined in a `layer.json` file. The format of this file is described in the [`SPECIFICATION.md`](./SPECIFICATION.md). This file contains information about the URL at which the actual terrain tiles can be requested. For example, when the URL for a tileset is
 
 ```
 http://example.com/tiles
 ```
 
-Then the two root files of the pyramid are found at these URLs:
+then the two root files of the pyramid may be found at these URLs:
 
-* (-180 deg, -90 deg) - (0 deg, 90 deg) - http://example.com/tiles/0/0/0.terrain
-* (0 deg, -90 deg) - (180 deg, 90 deg) - http://example.com/tiles/0/1/0.terrain
+* (-180 deg, -90 deg) - (0 deg, 90 deg) - `http://example.com/tiles/0/0/0.terrain`
+* (0 deg, -90 deg) - (180 deg, 90 deg) - `http://example.com/tiles/0/1/0.terrain`
 
-The eight tiles at the next level are found at these URLs:
+The eight tiles at the next level are then found at these URLs:
 
-* (-180 deg, -90 deg) - (-90 deg, 0 deg) - http://example.com/tiles/1/0/0.terrain
-* (-90 deg, -90 deg) - (0 deg, 0 deg) - http://example.com/tiles/1/1/0.terrain
-* (0 deg, -90 deg) - (90 deg, 0 deg) - http://example.com/tiles/1/2/0.terrain
-* (90 deg, -90 deg) - (180 deg, 0 deg) - http://example.com/tiles/1/3/0.terrain
-* (-180 deg, 0 deg) - (-90 deg, 90 deg) - http://example.com/tiles/1/0/1.terrain
-* (-90 deg, 0 deg) - (0 deg, 90 deg) - http://example.com/tiles/1/1/1.terrain
-* (0 deg, 0 deg) - (90 deg, 90 deg) - http://example.com/tiles/1/2/1.terrain
-* (90 deg, 0 deg) - (180 deg, 90 deg) - http://example.com/tiles/1/3/1.terrain
+* (-180 deg, -90 deg) - (-90 deg, 0 deg) - `http://example.com/tiles/1/0/0.terrain`
+* (-90 deg, -90 deg) - (0 deg, 0 deg) - `http://example.com/tiles/1/1/0.terrain`
+* (0 deg, -90 deg) - (90 deg, 0 deg) - `http://example.com/tiles/1/2/0.terrain`
+* (90 deg, -90 deg) - (180 deg, 0 deg) - `http://example.com/tiles/1/3/0.terrain`
+* (-180 deg, 0 deg) - (-90 deg, 90 deg) - `http://example.com/tiles/1/0/1.terrain`
+* (-90 deg, 0 deg) - (0 deg, 90 deg) - `http://example.com/tiles/1/1/1.terrain`
+* (0 deg, 0 deg) - (90 deg, 90 deg) - `http://example.com/tiles/1/2/1.terrain`
+* (90 deg, 0 deg) - (180 deg, 90 deg) - `http://example.com/tiles/1/3/1.terrain`
 
 When requesting tiles, be sure to include the following HTTP header in the request:
 ```
@@ -106,7 +108,7 @@ Once decoded, the meaning of a value in each array is as follows:
 | Field | Meaning |
 | ----- | ------- |
 | u | The horizontal coordinate of the vertex in the tile. When the u value is 0, the vertex is on the Western edge of the tile. When the value is 32767, the vertex is on the Eastern edge of the tile. For other values, the vertex's longitude is a linear interpolation between the longitudes of the Western and Eastern edges of the tile. |
-| v | The vertical coordinate of the vertex in the tile. When the v value is 0, the vertex is on the Southern edge of the tile. When the value is 32767, the vertex is on the Northern edge of the tile. For other values, the vertex's latitude is a linear interpolation between the latitudes of the Southern and Nothern edges of the tile. |
+| v | The vertical coordinate of the vertex in the tile. When the v value is 0, the vertex is on the Southern edge of the tile. When the value is 32767, the vertex is on the Northern edge of the tile. For other values, the vertex's latitude is a linear interpolation between the latitudes of the Southern and Northern edges of the tile. |
 | height | The height of the vertex in the tile. When the height value is 0, the vertex's height is equal to the minimum height within the tile, as specified in the tile's header. When the value is 32767, the vertex's height is equal to the maximum height within the tile. For other values, the vertex's height is a linear interpolation between the minimum and maximum heights. |
 
 Immediately following the vertex data is the index data. Indices specify how the vertices are linked together into triangles. If tile has more than 65536 vertices, the tile uses the `IndexData32` structure to encode indices. Otherwise, it uses the `IndexData16` structure.
@@ -198,7 +200,7 @@ struct ExtensionHeader
 }
 ```
 
-As new extensions are defined, they will be assigned a unique identifier. If no extensions are defined for the tileset, an `ExtensionHeader` will not included in the quanitzed-mesh. Multiple extensions may be appended to the quantized-mesh data, where ordering of each extension is determined by the server.
+As new extensions are defined, they will be assigned a unique identifier. If no extensions are defined for the tileset, an `ExtensionHeader` will not included in the quantized-mesh. Multiple extensions may be appended to the quantized-mesh data, where ordering of each extension is determined by the server.
 
 Multiple extensions may be requested by the client by delimiting extension names with a `-`. For example, a client can request vertex normals and watermask using the following Accept header:
 
