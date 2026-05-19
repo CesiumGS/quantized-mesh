@@ -54,3 +54,17 @@ The request URL (including the substituted template variables) and these paramet
 
 While the value of `minzoom` can technically be greater than 0, some details of the behavior are not clearly specified for this case. Many clients will ignore the `minzoom` value, and assume the availability information to be present for layer 0.
 
+## About the refinement process
+
+_This section is non-normative!_
+
+Client implementations will usually traverse the tile hierarchy for a quantized mesh, replacing the rendered representation of one tile with its child tiles, until the desired refinement level is achieved. During this process, the availability of child tiles is checked with the `available`- or `metadataAvailability` properties. The availability will be looked up either directly, or via the layer information that is found under the `parentUrl`.
+
+During this process, it can happen that only a _some_ of the four children of a given parent tile are marked as being available.
+
+Clients have different options for handling this case:
+
+- Clients _could_ omit the child tiles that are not available. This would cause gaps in the visual representation of the tiles, and is therefore not recommended
+- Clients can take the geometry of the parent tile, split it into four parts, and use the respective parts from the parent geometry to fill the gaps that would otherwise be caused by children that are not available
+- Clients can generate artificial "fill tiles" to fill the gaps. These tiles will usually be generated at runtime, by aligning the borders with the geometry of the surrounding tiles, and interpolating the vertex heights bilinearly between the heights of the border vertices.
+
