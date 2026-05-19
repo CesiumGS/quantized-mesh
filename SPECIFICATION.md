@@ -60,7 +60,7 @@ _This section is non-normative!_
 
 Client implementations will usually traverse the tile hierarchy for a quantized mesh, replacing the rendered representation of one tile with its child tiles, until the desired refinement level is achieved. During this process, the availability of child tiles is checked with the `available`- or `metadataAvailability` properties. The availability will be looked up either directly, or via the layer information that is found under the `parentUrl`.
 
-During this process, it can happen that only a _some_ of the four children of a given parent tile are marked as being available.
+During this process, it can happen that only _some_ of the four children of a given parent tile are marked as being available.
 
 Clients have different options for handling this case:
 
